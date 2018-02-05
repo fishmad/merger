@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('admin.users.index')->with('users', $users);
+        return view('settings.users.index')->with('users', $users);
 
         // $user = User::findOrFail($id);
         // $roles = Role::get();
@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $user = User::findOrFail($id);
 			
-        return view('admin.users.show', compact('user'));
+        return view('settings.users.show', compact('user'));
 
     }
 
@@ -67,7 +67,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $roles = Role::get();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('settings.users.edit', compact('user', 'roles'));
     }
 
 
@@ -80,7 +80,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
-        return view('admin.users.create', ['roles'=>$roles]);
+        return view('settings.users.create', ['roles'=>$roles]);
     }
 
 
@@ -96,7 +96,7 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect('admin/users')->with('flash_message','User successfully deleted.');
+        return redirect('settings/users')->with('flash_message','User successfully deleted.');
     }
 
 
@@ -109,10 +109,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'name'=>'required|max:120',
-            'email'=>'required|email|unique:users',
-            'password'=>'required|min:6|confirmed'
+            'name'    =>'required|min:2|max:120|unique:users',
+            'email'   =>'required|email|unique:users',
+            'password'=>'required|min:6'
+            // 'password'=>'required|min:6|confirmed'
         ]);
 
         $user = User::create($request->only('email', 'name', 'password'));
@@ -127,7 +129,7 @@ class UserController extends Controller
             }
         }        
 
-        return redirect('admin/users')->with('flash_message','User successfully added.');
+        return redirect('settings/users')->with('flash_message','User successfully added.');
     }
 
 
@@ -143,7 +145,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $this->validate($request, [
-            'name'=>'required|max:120',
+            'name'=>'required|min:2|max:120',
             'email'=>'required|email|unique:users,email,'.$id,
             'password'=>'nullable|min:6'
         ]);
@@ -164,7 +166,7 @@ class UserController extends Controller
             $user->roles()->detach(); // Remove any unticked roles[o] references in table: role_has_permissions 
         }
 
-        return redirect('admin/users')->with('flash_message', 'User successfully edited.');
+        return redirect('settings/users')->with('flash_message', 'User successfully edited.');
 
 
 
