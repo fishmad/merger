@@ -10,7 +10,8 @@
         "fishmad/checkmate": "dev-master",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "spatie/laravel-permission": "^2.7"
+        "spatie/laravel-permission": "^2.7",
+        "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 
 use App\Sample;
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 
 class SamplesController extends Controller
@@ -37,10 +38,25 @@ class SamplesController extends Controller
             $samples = Sample::paginate($perPage);
         }
 
-        return view('admin.samples.index', compact('samples'));
+        return view('samples.index', compact('samples'));
     }
 
+	
+	
+	public function data()
+	{
+		$samples = Sample::select(['id', 'title', 'email', 'created_at', 'updated_at']);
 
+		return Datatables::of($samples)
+			->addColumn('action', function ($sample) {
+				return '<a href="samples/' . $sample->id . '/edit" class="btn btn-outline-primary"><i class="fa fa-star"></i> Edit</a>';
+			})
+			->editColumn('id', 'ID: {{$id}}')
+			->make(true);
+	}			
+
+
+			
     /**
      * Display the specified resource.
      *
@@ -57,7 +73,7 @@ class SamplesController extends Controller
 
 			$sample = Sample::findOrFail($id);
 
-			return view('admin.samples.show', compact('sample'));
+			return view('samples.show', compact('sample'));
     }
 
 
@@ -77,7 +93,7 @@ class SamplesController extends Controller
 
         $sample = Sample::findOrFail($id);
 
-        return view('admin.samples.edit', compact('sample'));
+        return view('samples.edit', compact('sample'));
     }
 
 
@@ -93,7 +109,7 @@ class SamplesController extends Controller
           return abort(401);
         }
 
-        return view('admin.samples.create');
+        return view('samples.create');
     }
 
 
@@ -113,7 +129,7 @@ class SamplesController extends Controller
 
         Sample::destroy($id);
 
-        return redirect('admin/samples')->with('flash_message', 'Sample deleted!');
+        return redirect('samples')->with('flash_message', 'Sample deleted!');
     }
 
 
@@ -139,7 +155,7 @@ class SamplesController extends Controller
         
         Sample::create($requestData);
 
-        return redirect('admin/samples')->with('flash_message', 'Sample added!');
+        return redirect('samples')->with('flash_message', 'Sample added!');
     }
 
 
@@ -167,7 +183,7 @@ class SamplesController extends Controller
         $sample = Sample::findOrFail($id);
         $sample->update($requestData);
 
-        return redirect('admin/samples')->with('flash_message', 'Sample updated!');
+        return redirect('samples')->with('flash_message', 'Sample updated!');
     }
 
 

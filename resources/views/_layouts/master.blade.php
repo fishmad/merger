@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
   <title>iConform Worker Safety &amp; Compliance Management System</title>
-  <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/simple-line-icons.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/simple-line-icons.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('css/custom.css') }}">  
+  @stack('head_scripts')
 </head>
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -32,6 +33,7 @@
   @include('_partials.coreui.scripts')
   
   @yield('myscript')
+  @stack('foot_scripts')
 
   <!-- BODY options, add following classes to body to change options
   '.header-fixed' - Fixed Header

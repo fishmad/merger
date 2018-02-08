@@ -1,3 +1,11 @@
 .app-header.navbar .navbar-brand {
   background-size: 120px auto;
 }
+
+.dataTables_wrapper.container-fluid {
+padding: 0 0px !important;
+}
+
+table.dataTable {
+  margin: 0 0 !important;
+}

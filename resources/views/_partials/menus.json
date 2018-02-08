@@ -74,13 +74,13 @@
         "icon": "<i class=\"icon-puzzle\"></i>",
         "items": [
           {
-            "name": "Workers",
-            "link": "\/settings\/workers",
+            "name": "Sample",
+            "link": "\/settings\/samples",
             "icon": "<i class=\"icon-puzzle\"></i>"
           },
           {
-            "name": "Dumbells",
-            "link": "\/settings\/dumbells",
+            "name": "Stumps",
+            "link": "\/settings\/stumps",
             "icon": "<i class=\"icon-puzzle\"></i>"
           }
         ]

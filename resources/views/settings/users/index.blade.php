@@ -8,7 +8,7 @@
               User Administration
             </div>
             <div class="card-body">
-              <a href="{{ url('/settings/users/create') }}" class="btn btn-success" title="Add User">
+              <a href="{{ url('/settings/users/create') }}" class="btn btn-primary" title="Add User">
                 <i class="fa fa-plus" aria-hidden="true"></i> Add User
               </a>
               {{--  {!! Form::open(['method' => 'GET', 'url' => '/settings/users', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
@@ -40,14 +40,14 @@
                     {{--  <td>{{ $item->created_at->format('F d, Y h:ia') }}</td>  --}}
                     <td>
 @foreach($item->roles()->pluck('name') as $roles )
-                      <span class="badge badge-secondary">{{ $roles }}</span>
+                      <span class="badge badge-info">{{ $roles }}</span>
 @endforeach
                       {{-- <span class="badge badge-success">{{ $item->roles()->pluck('name')->implode('; ') }}</span> --}}
                     </td>
                     {{-- Retrieve array of roles associated to a user and convert to string --}}
                     <td class="text-right">
-                      <a href="{{ url('/settings/users/' . $item->id) }}" title="View Sample"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                      <a href="{{ url('/settings/users/' . $item->id . '/edit') }}" title="Edit Sample"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                      <a href="{{ url('/settings/users/' . $item->id) }}" title="View Sample"><button class="btn btn-success btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                      <a href="{{ url('/settings/users/' . $item->id . '/edit') }}" title="Edit Sample"><button class="btn btn-warning btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                       {!! Form::open([
                           'method'=>'DELETE',
                           'url' => ['/settings/users', $item->id],

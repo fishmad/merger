@@ -29,8 +29,17 @@ Route::resource('settings/permissions', 'Admin\PermissionController');
 Route::get('settings/generator', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@getGenerator']);
 Route::post('settings/generator', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@postGenerator']);
 Route::resource('settings/posts', 'Admin\PostController');
-Route::resource('settings/samples', 'Admin\SamplesController');
 Route::resource('settings/stump', 'Admin\\StumpController');
+
+
+
+
+Route::get('settings/samples', 'Admin\\SamplesController@index');
+Route::get('settings/samples/data', 'Admin\\SamplesController@data')->name('settings.samples.data');
+Route::resource('settings/samples', 'Admin\\SamplesController');
+
+
+
 
 /* CoreUI templates */
 Route::middleware('auth')->group(function() {
