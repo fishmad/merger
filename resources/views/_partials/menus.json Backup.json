@@ -1,0 +1,90 @@
+{
+  "menus": [
+
+      {
+        "section": "External Pages",
+        "icon": "<i class=\"icon-docs\"></i>",
+        "items": [
+          {
+            "name": "Home",
+            "link": "#",
+            "icon": "<i class=\"icon-home\"></i>"
+          },
+          {
+            "name": "About",
+            "link": "#",
+            "icon": "<i class=\"icon-note\"></i>"
+          },
+          {
+            "name": "Contact",
+            "link": "#",
+            "icon": "<i class=\"icon-phone\"></i>"
+          }
+        ]
+      },
+
+      {
+        "section": "Users & Roles",
+        "icon": "<i class=\"icon-people\"></i>",
+        "items": [
+          {
+            "name": "Users",
+            "link": "\/settings\/users",
+            "icon": "<i class=\"icon-user\"></i>",
+            "submenu": [
+              {
+                "name": "List All Users",
+                "link": "\/settings\/users",
+                "icon": "<i class=\"icon-people\"></i>"
+              },
+              {
+                "name": "Add New User",
+                "link": "\/settings\/users\/create",
+                "icon": "<i class=\"icon-user-follow\"></i>"
+              }
+            ]
+          }, 
+          {
+            "name": "Roles",
+            "link": "\/settings\/roles",
+            "icon": "<i class=\"icon-key\"></i>"
+          },
+          {
+            "name": "Permissions",
+            "link": "\/settings\/permissions",
+            "icon": "<i class=\"icon-lock-open\"></i>"
+          }
+        ]
+      },
+
+      {
+        "section": "Tools",
+        "icon": "<i class=\"icon-settings\"></i>",
+        "items": [
+          {
+            "name": "CRUD Generator",
+            "link": "\/settings\/generator",
+            "icon": "<i class=\"icon-grid\"></i>"
+          }
+        ]
+      },
+
+      {
+        "section": "Modules",
+        "icon": "<i class=\"icon-puzzle\"></i>",
+        "items": [
+          {
+            "name": "Sample",
+            "link": "\/settings\/samples",
+            "icon": "<i class=\"icon-puzzle\"></i>"
+          },
+          {
+            "name": "Stumps",
+            "link": "\/settings\/stumps",
+            "icon": "<i class=\"icon-puzzle\"></i>"
+          }
+        ]
+      }
+
+  ]
+}

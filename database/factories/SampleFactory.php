@@ -17,7 +17,10 @@ $factory->define(App\Sample::class, function (Faker $faker) {
     static $password;
 
     return [
-        'title' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
+        'title' 		=> $faker->sentence($nbWords = 6, $variableNbWords = true),
+		'description' 	=> $faker->paragraph,
+		'image' 		=> $faker->imageUrl($width = 640, $height = 480),
+        'email' 		=> $faker->unique()->safeEmail,
+		'date' 			=> $faker->date($format = 'Y-m-d', $max = 'now'),
     ];
 });

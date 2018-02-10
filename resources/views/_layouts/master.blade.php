@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
   <title>iConform Worker Safety &amp; Compliance Management System</title>
   <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
@@ -18,10 +19,32 @@
   
   <div class="app-body">
     @include('_partials.coreui.sidebar')
-	
+
     <main class="main">
       @include('_partials.coreui.breadcrumb')
-	  
+
+        @if (Session::has('flash_message'))
+        <div class="container-fluid">
+          <div class="alert  alert-success alert-dismissible fade show" role="alert">
+            {{ Session::get('flash_message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        @endif
+
+        @if (Session::has('flash_danger'))
+        <div class="container-fluid">
+          <div class="alert  alert-danger alert-dismissible fade show" role="alert">
+            {{ Session::get('flash_danger') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        @endif
+
       @yield('content')
     </main>
 
@@ -32,8 +55,7 @@
 
   @include('_partials.coreui.scripts')
   
-  @yield('myscript')
-  @stack('foot_scripts')
+  @stack('scripts')
 
   <!-- BODY options, add following classes to body to change options
   '.header-fixed' - Fixed Header

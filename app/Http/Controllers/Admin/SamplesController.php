@@ -6,7 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Gate;
-
+use DB;
 use App\Sample;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
@@ -21,39 +21,34 @@ class SamplesController extends Controller
     public function index(Request $request)
     {
 
+      // $this->authorize('sample_browse', $request);
         if (! Gate::allows('sample_browse')) {
-            return abort(401);
+            //return abort(401);
+            return redirect()->guest('login');
         }
 
-        $keyword = $request->get('search');
-        $perPage = 25;
+        $dbFields = DB::getSchemaBuilder()->getColumnListing('samples');
 
-        if (!empty($keyword)) {
-            $samples = Sample::where('title', 'LIKE', "%$keyword%")
-                ->orWhere('email', 'LIKE', "%$keyword%")
-                ->orWhere('date', 'LIKE', "%$keyword%")
-                ->orWhere('description', 'LIKE', "%$keyword%")
-                ->paginate($perPage);
-        } else {
-            $samples = Sample::paginate($perPage);
-        }
-
-        return view('samples.index', compact('samples'));
+        return view('settings.samples.index', compact('dbFields'));
     }
 
-	
-	
-	public function data()
-	{
-		$samples = Sample::select(['id', 'title', 'email', 'created_at', 'updated_at']);
 
-		return Datatables::of($samples)
-			->addColumn('action', function ($sample) {
-				return '<a href="samples/' . $sample->id . '/edit" class="btn btn-outline-primary"><i class="fa fa-star"></i> Edit</a>';
-			})
-			->editColumn('id', 'ID: {{$id}}')
-			->make(true);
-	}			
+  public function datatables()
+  {
+    // $samples = Sample::select(['id', 'title', 'email', 'description', 'updated_at']);
+    $samples = Sample::all();
+
+    return Datatables::of($samples)
+      ->addColumn('action', function ($sample) {
+
+          $btns    = '<a href="/settings/samples/' . $sample->id . '" title="View" class="btn btn-primary btn-sm"><i class="fa fa-fw fa-search-plus"></i></a> ';
+          $btns   .= '<a href="/settings/samples/' . $sample->id . '/edit" title="Edit" class="btn btn-success btn-sm"><i class="fa fa-fw fa-edit"></i></a> ';
+          $btns   .= '<button class="btn btn-danger btn-sm btn-delete" data-remote="/settings/samples/' . $sample->id . '"><i class="fa fa-fw fa-trash-o" aria-hidden="true"></i>';
+
+        return $btns;
+    })
+      ->make(true);
+	}
 
 
 			
@@ -67,13 +62,13 @@ class SamplesController extends Controller
     public function show($id)
     {
 
-			if (! Gate::allows('sample_read')) {
-					return abort(401);
-			}
+      // if (! Gate::allows('sample_read')) {
+      //    return abort(401);
+      // }
 
-			$sample = Sample::findOrFail($id);
+      $sample = Sample::findOrFail($id);
 
-			return view('samples.show', compact('sample'));
+      return view('settings.samples.show', compact('sample'));
     }
 
 
@@ -93,7 +88,7 @@ class SamplesController extends Controller
 
         $sample = Sample::findOrFail($id);
 
-        return view('samples.edit', compact('sample'));
+        return view('settings.samples.edit', compact('sample'));
     }
 
 
@@ -109,7 +104,7 @@ class SamplesController extends Controller
           return abort(401);
         }
 
-        return view('samples.create');
+        return view('settings.samples.create');
     }
 
 
@@ -129,7 +124,7 @@ class SamplesController extends Controller
 
         Sample::destroy($id);
 
-        return redirect('samples')->with('flash_message', 'Sample deleted!');
+        return redirect('settings/samples')->with('flash_message', 'Sample deleted!');
     }
 
 
@@ -155,7 +150,7 @@ class SamplesController extends Controller
         
         Sample::create($requestData);
 
-        return redirect('samples')->with('flash_message', 'Sample added!');
+        return redirect('settings/samples')->with('flash_message', 'Sample added!');
     }
 
 
@@ -183,7 +178,7 @@ class SamplesController extends Controller
         $sample = Sample::findOrFail($id);
         $sample->update($requestData);
 
-        return redirect('samples')->with('flash_message', 'Sample updated!');
+        return redirect('settings/samples')->with('flash_message', 'Sample updated!');
     }
 
 

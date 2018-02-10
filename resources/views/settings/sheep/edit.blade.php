@@ -3,13 +3,13 @@
 @section('content')
     <div class="container">
         <div class="row">
-
+            @include('admin.partials.sidebar')
 
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Create New Sample</div>
+                    <div class="panel-heading">Edit Sheep #{{ $sheep->id }}</div>
                     <div class="panel-body">
-                        <a href="{{ url('/admin/samples') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
+                        <a href="{{ url('/settings/sheep') }}" title="Back"><button class="btn btn-warning btn-xs"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button></a>
                         <br />
                         <br />
 
@@ -21,9 +21,14 @@
                             </ul>
                         @endif
 
-                        {!! Form::open(['url' => '/admin/samples', 'class' => 'form-horizontal', 'files' => true]) !!}
+                        {!! Form::model($sheep, [
+                            'method' => 'PATCH',
+                            'url' => ['/settings/sheep', $sheep->id],
+                            'class' => 'form-horizontal',
+                            'files' => true
+                        ]) !!}
 
-                        @include ('admin.samples.form')
+                        @include ('settings.sheep.form', ['submitButtonText' => 'Update'])
 
                         {!! Form::close() !!}
 

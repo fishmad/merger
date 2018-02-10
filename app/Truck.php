@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Sample extends Model
+class Truck extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'samples';
+    protected $table = 'trucks';
 
     /**
     * The database primary key value.
@@ -25,6 +25,7 @@ class Sample extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'email', 'date', 'description'];
+    protected $fillable = ['name', 'description'];
 
+    
 }

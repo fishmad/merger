@@ -26,18 +26,22 @@ Route::resource('settings/users', 'Admin\UserController');
 Route::resource('settings/roles', 'Admin\RoleController');
 Route::resource('settings/permissions', 'Admin\PermissionController');
 // Route::get('admin/users', 'Admin\UserController@index')->name('users'); // A named route
+
 Route::get('settings/generator', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@getGenerator']);
 Route::post('settings/generator', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@postGenerator']);
+
+Route::get('tools/crud', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@getGenerator']);
+Route::post('tools/crud', ['uses' => '\Fishmad\Checkmate\Controllers\ProcessController@postGenerator']);
+
 Route::resource('settings/posts', 'Admin\PostController');
 Route::resource('settings/stump', 'Admin\\StumpController');
 
 
-
-
-Route::get('settings/samples', 'Admin\\SamplesController@index');
-Route::get('settings/samples/data', 'Admin\\SamplesController@data')->name('settings.samples.data');
+Route::get('settings/samples/datatables', 'Admin\\SamplesController@datatables')->name('settings.samples.datatables');
 Route::resource('settings/samples', 'Admin\\SamplesController');
-
+// Route::get('settings/samples', 'Admin\\SamplesController@index');
+// Route::get('settings/samples/{id}', 'Admin\\SamplesController@show');
+// Route::get('settings/samples/{sample}', 'Admin\\SamplesController@show');
 
 
 
@@ -71,3 +75,7 @@ Route::middleware('auth')->group(function() {
 // Section Pages
 Route::view('/error404','_errors.404')->name('error404');
 Route::view('/error500','_errors.500')->name('error500');
+Route::resource('admin/frogs', 'Admin\\FrogsController');
+Route::resource('settings/plants', 'Settings\\PlantsController');
+Route::resource('settings/trucks', 'Settings\\TrucksController');
+Route::resource('settings/sheep', 'Settings\\SheepController');

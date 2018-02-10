@@ -1,3 +1,18 @@
+@foreach ($columns as $column => $name)
+@if ($name === "created_at" || $name === "updated_at" )
+{{--  {{ $name }}: false,  --}}
+@else 
+<th>{{ $name }}</th>
+@endif
+@endforeach
+
+
+
+
+
+
+
+
 @extends('_layouts.master')
 
 @section('content')

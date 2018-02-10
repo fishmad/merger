@@ -15,7 +15,6 @@ class SamplesTableSeeder extends Seeder
             // 'title' => str_random(10),
             // 'email' => str_random(10).'@gmail.com',
         // ]);
-		
 
 		$samples = factory(App\Sample::class, 100)->create();
 		
