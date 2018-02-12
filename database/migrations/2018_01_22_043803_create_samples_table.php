@@ -16,9 +16,10 @@ class CreateSamplesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('title');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
+						//$table->text('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('email')->nullable();
+            $table->string('email', 150)->nullable();
             $table->date('date')->nullable();
 
             // $table->json('json');
